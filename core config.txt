@@ -1,0 +1,253 @@
+Building configuration...
+
+Current configuration : 7948 bytes
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname 3550
+!
+enable secret 5 $1$yapw$QQYfJ70OIPlCmx9dMK.Yx.
+enable password 7 082E471F5B4A
+!
+no aaa new-model
+ip subnet-zero
+ip routing
+no ip domain-lookup
+ip dhcp database tftp://192.168.3.4/dhcp-release write-delay 60
+ip dhcp excluded-address 192.168.12.230 192.168.12.254
+ip dhcp excluded-address 192.168.13.230 192.168.13.254
+ip dhcp excluded-address 192.168.16.230 192.168.16.254
+ip dhcp excluded-address 192.168.6.230 192.168.6.254
+ip dhcp excluded-address 192.168.17.230 192.168.17.254
+ip dhcp excluded-address 192.168.22.230 192.168.22.254
+ip dhcp excluded-address 192.168.7.100 192.168.7.125
+ip dhcp excluded-address 192.168.113.220 192.168.113.230
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3162797312
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3162797312
+ revocation-check none
+ rsakeypair TP-self-signed-3162797312
+!
+!
+crypto pki certificate chain TP-self-signed-3162797312
+ certificate self-signed 01
+  3082023D 308201A6 A0030201 02020101 300D0609 2A864886 F70D0101 04050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 33313632 37393733 3132301E 170D3933 30333031 30303031
+  33375A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 31363237
+  39373331 3230819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100CB6F 728F6F35 1B2120E4 80E25138 90937FA2 31B7DCD7 36DA4505 A8D40481
+  A07ADE53 2864BCD7 C7702BB5 BC3DF5B7 D67B2488 1F4BFD89 129E8930 4D998D2A
+  ED8000C4 403822F8 6A38DB65 EEF0ED77 B98A51B2 2C796FEC F3F2DF09 644C89A4
+  F846DE3D 852FB4AA BDA91826 24C29F5D 1651D9B7 E9CC79F7 3F588A3A 94D5A1DF
+  05AD0203 010001A3 65306330 0F060355 1D130101 FF040530 030101FF 30100603
+  551D1104 09300782 05333535 302E301F 0603551D 23041830 168014DB F2D3B544
+  52555BDE A5AD7D8C 82BEEC14 D32F8130 1D060355 1D0E0416 0414DBF2 D3B54452
+  555BDEA5 AD7D8C82 BEEC14D3 2F81300D 06092A86 4886F70D 01010405 00038181
+  002B2775 E666B724 CB0D6D1D 9CF1C4F5 48D7A590 052FB58F DC072385 982B61D9
+  FBC9BE40 E144928C 010D2A1D B2B5884B 03528329 E34DF169 4D502E58 36C9BDDE
+  B2D5EA9E 97FD8127 2E16971D 4A40A1DD F4410BBD 93D90D05 E5702321 3A0A26A2
+  9D185ABB 00A02E02 396DFD21 0E5966F2 F283183D 7C14223D 9855783C A9E6BB79 2C
+  quit
+!
+!
+spanning-tree mode pvst
+spanning-tree etherchannel guard misconfig
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/1
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/2
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/3
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1-200
+ switchport mode trunk
+!
+interface GigabitEthernet0/4
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/5
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/6
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/7
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/8
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/9
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/10
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/11
+ switchport access vlan 11
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/12
+ switchport access vlan 21
+ switchport mode dynamic desirable
+!
+interface Vlan1
+ ip address 192.168.0.210 255.255.255.0
+!
+interface Vlan3
+ ip address 192.168.3.1 255.255.255.0
+!
+interface Vlan6
+ ip address 192.168.6.1 255.255.255.0
+!
+interface Vlan7
+ ip address 192.168.7.1 255.255.255.0
+!
+interface Vlan10
+ no ip address
+!
+interface Vlan11
+ ip address 192.168.11.2 255.255.255.0
+!
+interface Vlan13
+ ip address 192.168.13.1 255.255.255.0
+!
+interface Vlan16
+ ip address 192.168.16.1 255.255.255.0
+!
+interface Vlan17
+ ip address 192.168.17.1 255.255.255.0
+!
+interface Vlan21
+ ip address 192.168.21.2 255.255.255.0
+!
+interface Vlan22
+ ip address 192.168.22.1 255.255.255.0
+!
+interface Vlan102
+ ip address 192.168.102.1 255.255.255.0
+!
+interface Vlan103
+ ip address 192.168.103.1 255.255.255.0
+!
+interface Vlan210
+ ip address 192.168.210.2 255.255.255.0
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 192.168.21.1
+ip route 172.16.20.0 255.255.255.0 192.168.22.254
+ip route 192.168.3.0 255.255.255.0 192.168.21.1
+ip route 192.168.4.0 255.255.255.0 192.168.11.1
+ip route 192.168.5.0 255.255.255.0 192.168.21.1
+ip route 192.168.10.0 255.255.255.0 192.168.21.1
+ip route 192.168.17.0 255.255.255.0 192.168.3.33
+ip route 192.168.22.0 255.255.255.0 192.168.21.1
+ip route 192.168.24.0 255.255.255.0 192.168.21.1
+ip route 192.168.30.0 255.255.255.0 192.168.21.1
+ip route 192.168.31.0 255.255.255.0 192.168.21.1
+ip route 192.168.101.0 255.255.255.0 192.168.21.1
+ip route 192.168.102.0 255.255.255.0 192.168.21.1
+ip route 192.168.103.0 255.255.255.0 192.168.21.1
+ip route 192.168.180.0 255.255.255.0 192.168.3.250
+ip http server
+ip http secure-server
+!
+!
+access-list 10 permit 192.168.3.28
+route-map pptp permit 10
+ match ip address 10
+ set ip next-hop 192.168.11.1
+!
+snmp-server community public RO
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps transceiver all
+snmp-server enable traps tty
+snmp-server enable traps eigrp
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf cisco-specific state-change nssa-trans-change
+snmp-server enable traps ospf cisco-specific state-change shamlink interface-old
+snmp-server enable traps ospf cisco-specific state-change shamlink neighbor
+snmp-server enable traps ospf cisco-specific errors
+snmp-server enable traps ospf cisco-specific retransmit
+snmp-server enable traps ospf cisco-specific lsa
+snmp-server enable traps cluster
+snmp-server enable traps entity
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps cpu threshold
+snmp-server enable traps power-ethernet group 1
+snmp-server enable traps power-ethernet police
+snmp-server enable traps vtp
+snmp-server enable traps vlancreate
+snmp-server enable traps vlandelete
+snmp-server enable traps flash insertion removal
+snmp-server enable traps port-security
+snmp-server enable traps auth-framework sec-violation
+snmp-server enable traps dot1x auth-fail-vlan guest-vlan no-auth-fail-vlan no-gu
+est-vlan
+snmp-server enable traps isakmp policy add
+snmp-server enable traps isakmp policy delete
+snmp-server enable traps isakmp tunnel start
+snmp-server enable traps isakmp tunnel stop
+snmp-server enable traps ipsec cryptomap add
+snmp-server enable traps ipsec cryptomap delete
+snmp-server enable traps ipsec cryptomap attach
+snmp-server enable traps ipsec cryptomap detach
+snmp-server enable traps ipsec tunnel start
+snmp-server enable traps ipsec tunnel stop
+snmp-server enable traps ipsec too-many-sas
+snmp-server enable traps bgp
+snmp-server enable traps cef resource-failure peer-state-change peer-fib-state-c
+hange inconsistency
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps config-ctid
+snmp-server enable traps hsrp
+snmp-server enable traps ipmulticast
+snmp-server enable traps msdp
+snmp-server enable traps pim neighbor-change rp-mapping-change invalid-pim-messa
+ge
+snmp-server enable traps energywise
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistenc
+y
+snmp-server enable traps syslog
+snmp-server enable traps rtr
+snmp-server enable traps errdisable
+snmp-server enable traps mac-notification
+snmp-server enable traps vlan-membership
+!
+control-plane
+!
+!
+line con 0
+line vty 0 4
+ password 7 082E471F5B4A
+ login
+line vty 5 15
+ password 7 02090F0A5955
+ login
+!
+end
